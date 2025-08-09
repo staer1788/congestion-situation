@@ -41,3 +41,49 @@
 ## ライセンス
 
 このプロジェクトはMITライセンスの下で公開されています。詳細は`LICENSE`ファイルを参照してください。
+
+---
+
+# Congestion Status Website
+
+This project is a website that displays congestion status using data from a Google Spreadsheet.
+
+## How to Use
+
+1.  **Prepare Your Google Spreadsheet**
+
+    Create a new Google Spreadsheet with the following columns:
+
+    | Column A     | Column B     | Column C         | Column D       |
+    | :----------- | :----------- | :--------------- | :------------- |
+    | Item Name    | Details      | Congestion Status| Last Updated   |
+
+    *   **Item Name**: Name of the place, event name, etc.
+    *   **Details**: Content of presentation, details of the place, etc.
+    *   **Congestion Status**: Enter one of the following: "空いています" (Available), "混んでいます" (Crowded), or "とても混んでいます" (Very Crowded).
+    *   **Last Updated**: Last updated date/time, etc.
+
+    The URL of your spreadsheet will look like this:
+    `https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit#gid=0`
+    Please note down the `YOUR_SHEET_ID` part of this URL.
+
+2.  **Google Apps Script Setup**
+
+    1.  Open your Google Spreadsheet, then go to "Extensions" > "Apps Script" to open the script editor.
+    2.  Copy the content of `Code.gs` and paste it into the script editor.
+    3.  Replace `YOUR_SHEET_ID` in `Code.gs` with your spreadsheet ID noted in step 1.
+    4.  Save the script.
+    5.  Select "Deploy" > "New deployment".
+    6.  For "Select type", choose "Web app".
+    7.  Set "Execute as" to "Me" and "Who has access" to "Anyone".
+    8.  Click "Deploy".
+    9.  Once deployed, a web app URL will be issued. This URL can be used if you want to use Google Apps Script as the backend for your website.
+
+3.  **Displaying the Website**
+
+    You can view the congestion status by opening the `index.html` file in this repository in your web browser.
+    `index.html` reads data from `data.json`. By keeping `data.json` up-to-date, the website display will also be updated.
+
+## License
+
+This project is released under the MIT License. See the `LICENSE` file for details.

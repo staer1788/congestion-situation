@@ -9,6 +9,9 @@ body {
     .venue, .club {
       margin-bottom: 30px;
     }
+    .item {
+      margin-bottom: 30px;
+    }
     .header-info {
       font-size: 18px;
       font-weight: bold;

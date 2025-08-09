@@ -22,42 +22,39 @@ function fetchData() {
 function displayData(data) {
   document.getElementById('status-message').innerText = 'Data fetched successfully.';
 
-  const { sheet1, sheet2 } = data;
-
-  displaySheetData(sheet1, 'sheet1-container');
-  displaySheetData(sheet2, 'sheet2-container');
+  // dataは単一の配列として渡される
+  displayItems(data, 'data-container');
 }
 
-function displaySheetData(data, containerId) {
+function displayItems(data, containerId) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
 
   if (data && data.length > 0) {
     data.forEach(row => {
       const div = document.createElement('div');
-      div.classList.add(containerId === 'sheet1-container' ? 'venue' : 'club');
+      div.classList.add('item'); // 新しいクラス名
 
       const headerInfo = document.createElement('div');
       headerInfo.classList.add('header-info');
-      // row[0]はクラス名または部活名、row[1]は場所、row[2]は発表内容または場所
-      // Google Apps ScriptのfetchSheetData()の戻り値の構造に合わせて調整
-      // sheet1: [クラス, 場所, 発表内容, 混雑状況]
-      // sheet2: [部活, 場所, 発表場所, 混雑状況]
-      // 混雑状況はrow[3]に格納されていると仮定
-      headerInfo.innerHTML = `<p>${containerId === 'sheet1-container' ? `クラス: ${row[0]} | 場所: ${row[1]}` : `部活: ${row[0]} | 場所: ${row[1]}`}</p>`;
+      // row[0]: 項目名 (場所A, イベントXなど)
+      // row[1]: 詳細 (発表内容A, イベント内容Xなど)
+      // row[2]: 混雑状況 (空いています, 混んでいます, とても混んでいます)
+      // row[3]: 最終更新
+      headerInfo.innerHTML = `<p><strong>${row[0]}</strong>: ${row[1]}</p>`;
       div.appendChild(headerInfo);
 
       const statusBox = document.createElement('div');
       statusBox.classList.add('status-box');
-      if (row[3] === '空いています') statusBox.classList.add('light-green');
-      else if (row[3] === '混んでいます') statusBox.classList.add('orange');
-      else if (row[3] === 'とても混んでいます') statusBox.classList.add('red');
+      if (row[2] === '空いています') statusBox.classList.add('light-green');
+      else if (row[2] === '混んでいます') statusBox.classList.add('orange');
+      else if (row[2] === 'とても混んでいます') statusBox.classList.add('red');
 
-      statusBox.innerHTML = `<p>${containerId === 'sheet1-container' ? `発表内容: ${row[2]}` : `発表場所: ${row[2]}`}</p><p>混雑状況: ${row[3]}</p>`;
+      statusBox.innerHTML = `<p>混雑状況: ${row[2]}</p><p>最終更新: ${row[3]}</p>`;
 
       const imagesContainer = document.createElement('div');
       imagesContainer.classList.add('images');
-      addImages(imagesContainer, row[3]);
+      addImages(imagesContainer, row[2]);
       statusBox.appendChild(imagesContainer);
 
       div.appendChild(statusBox);

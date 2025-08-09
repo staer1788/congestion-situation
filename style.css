@@ -1,0 +1,39 @@
+body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .venue, .club {
+      margin-bottom: 30px;
+    }
+    .header-info {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .status-box {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .status-box.light-green { background-color: lightgreen; }
+    .status-box.orange { background-color: orange; }
+    .status-box.red { background-color: red; }
+    .images {
+      display: flex;
+      margin-top: 10px;
+    }
+    .images img {
+      width: 35px;
+      height: 35px;
+      margin-right: 5px;
+    }
+    .status-message {
+      font-size: 16px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
